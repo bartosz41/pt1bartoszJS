@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulari Bartosz</title>
+</head>
+<body>
+    <form>
+        <label>Columnes:</label>
+        <input id="columnes" required="true" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" type="number" min="0" placeholder="Nr columnes...">
+        <label>Files:</label>
+        <input id="files" required="true" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" type="number" min="0" placeholder="Nr files...">
+        <label>Pastilles:</label>
+        <input id="pastilles" required="true" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0" type="number" placeholder="Nr pastilles...">
+        <button type="submit" onclick="createCookies()">Enviar</button>
+    </form>
+    <script>
+        function createCookies(){
+        const files = document.getElementById('files').value;
+        const columnes = document.getElementById('columnes').value;
+        const pastilles = document.getElementById('pastilles').value;
+        if(files){
+            document.cookie = "files" + "=" + files + ";";
+        }
+        if(columnes){
+            document.cookie = "columnes" + "=" + columnes + ";";
+        }
+        if(pastilles){
+            document.cookie = "pastilles" + "=" + pastilles +";";
+        }
+        window.alert("Cookies creades correctament");
+        document.cookie.replace(" ","");
+        window.close();
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT1 JS Bartosz</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <button onclick="obrirFormulari()">Demanar dades</button>
+    <table id="rajoles" class="taula"></table>
+    <script>
+        function obrirFormulari(){
+            let finestra = window.open("/form.html","_blank");
+            finestra.onbeforeunload = function(){
+                console.log("hola");
+                readCookies();
+            }
+        }
+        function readCookies(){
+            const cookies = document.cookie.split('; ');
+            let files = "";
+            let columnes = "";
+            let pastilles = "";
+            console.log(cookies)
+            cookies.forEach(cookie => {
+                cookie.replaceAll(" ","");
+                const splittedCookie = cookie.split("=");
+                const name = splittedCookie[0];
+                const value = splittedCookie[1];
+                if(name == "files"){
+                    files = value;
+                }
+                if(name == "columnes"){
+                    columnes = value;
+                }
+                if(name == "pastilles"){
+                    pastilles = value;
+                }
+            });
+            loadPastilles(files,columnes,pastilles);
+        }
+        function loadPastilles(files,columnes,pastilles){
+            const rajoles = Math.ceil(pastilles / (files * columnes));
+            console.log(rajoles);
+            for(let i = 0; i < rajoles; i++){
+                const taulaPrincipal = document.getElementById('rajoles');
+                const table = document.createElement('table');
+                table.classList.add('rajola');
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.classList.add('quadret');
+                tr.appendChild(td);
+                table.appendChild(tr);
+                taulaPrincipal.appendChild(table);
+            };
+        }
+    </script>
+</body>
+</html>
